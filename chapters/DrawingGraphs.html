@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Drawing Graphs &#8212; Python For Biochemists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/DrawingGraphs';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pandas For Working With Tabular Data" href="PandasForTabularData.html" />
+    <link rel="prev" title="Libraries" href="Libraries.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../WelcomeToPythonForBiochemists.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Python For Biochemists - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Python For Biochemists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../WelcomeToPythonForBiochemists.html">
+                    Welcome to Python for Biochemists
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="JupyterNotebooksGettingStarted.html">Jupyter Notebooks: Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VariablesArithmeticOperators.html">Variables and Arithmetic Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataTypesIndicesSlices.html">Data Types, Index, and Slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ForLoopsLogicStatementsFunctions.html">For Loops, Logic Statements, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Libraries.html">Libraries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Drawing Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PandasForTabularData.html">Pandas For Working With Tabular Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapters/DrawingGraphs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/DrawingGraphs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Drawing Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kind-of-graphs"><span style="color:blue">Kind of graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-line-graphs"><span style="color:blue">Plotting line graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-bar-graphs"><span style="color:blue">Plotting bar graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphs-checklist"><span style="color:blue">Graphs checklist</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples"><span style="color:blue">Examples</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises"><span style="color:blue">Exercises</span></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="drawing-graphs">
+<h1>Drawing Graphs<a class="headerlink" href="#drawing-graphs" title="Link to this heading">#</a></h1>
+<section id="kind-of-graphs">
+<h2><span style="color:blue">Kind of graphs</span><a class="headerlink" href="#kind-of-graphs" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a> offers several kinds of charts: scatter plots, histograms, bar graphs, pie plots … It is up to you to choose the type that works for your data! The flowchart below can help.</p>
+<a class="reference internal image-reference" href="../_images/GraphTypes.png"><img alt="Various graph types" class="align-center" src="../_images/GraphTypes.png" style="width: 600px;" /></a>
+<p>See also <a class="reference external" href="https://matplotlib.org/stable/plot_types/index.html">the matplotlib plot types page</a> for more information and example Python code!</p>
+</section>
+<section id="plotting-line-graphs">
+<h2><span style="color:blue">Plotting line graphs</span><a class="headerlink" href="#plotting-line-graphs" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>We can <strong>plot scientific data</strong> to visualize <em>how variables are related or how the data vary from sample to sample or if more data are needed or …</em></p>
+<p>We can <strong>plot a function</strong> (x, y = function(x, parameters)) to see <em>how the function behaves at different values of x or with different parameters</em>.</p>
+<p>To create a line graph:</p>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html">matplotlib.pyplot.figure</a> to create a figure object. This is needed when we want to <em>e.g.</em> tweak the size of the figure.</p></li>
+<li><p>Use <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html">matplotlib.pyplot.plot</a> to produce a plot. The first and second arguments are for the x-values and y-values, <em>i.e.</em> the independent and dependent variables. If no x-values are provided, the default is (0, 1, … n-1) with n the length of the y-values. This function has also several optional arguments define basic formatting properties like color (<code class="docutils literal notranslate"><span class="pre">color</span></code>), marker (<code class="docutils literal notranslate"><span class="pre">marker</span></code> and <code class="docutils literal notranslate"><span class="pre">markersize</span></code>), line (<code class="docutils literal notranslate"><span class="pre">linestyle</span></code> and <code class="docutils literal notranslate"><span class="pre">linewidth</span></code>), and names for legend items (<code class="docutils literal notranslate"><span class="pre">label</span></code>).</p></li>
+<li><p>Color values can be color names or abbreviations, e.g. <code class="docutils literal notranslate"><span class="pre">black</span></code> = <code class="docutils literal notranslate"><span class="pre">k</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code> = <code class="docutils literal notranslate"><span class="pre">r</span></code>, <code class="docutils literal notranslate"><span class="pre">yellow</span></code> = <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code> = <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">cyan</span></code> = <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">blue</span></code> = <code class="docutils literal notranslate"><span class="pre">b</span></code> …</p></li>
+<li><p>Markers can be <code class="docutils literal notranslate"><span class="pre">circles</span></code> = <code class="docutils literal notranslate"><span class="pre">o</span></code>, <code class="docutils literal notranslate"><span class="pre">squares</span></code> = <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">triangle</span> <span class="pre">up</span></code> = <code class="docutils literal notranslate"><span class="pre">^</span></code>, <code class="docutils literal notranslate"><span class="pre">triangle</span> <span class="pre">down</span></code> = <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">diamond</span></code> = <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">cross</span></code> = <code class="docutils literal notranslate"><span class="pre">x</span></code> …</p></li>
+<li><p>Line styles can be <code class="docutils literal notranslate"><span class="pre">solid</span></code> = <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">dashed</span></code> = <code class="docutils literal notranslate"><span class="pre">--</span></code>, <code class="docutils literal notranslate"><span class="pre">dotted</span></code> = <code class="docutils literal notranslate"><span class="pre">:</span></code> …</p></li>
+<li><p>Add features, such as title, axis labels, axis limits, and a legend to the plot using <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html">matplotlib.pyplot.title</a>, <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html">matplotlib.pyplot.xlabel</a>, <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html">matplotlib.pyplot.ylabel</a>, <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html">matplotlib.pyplot.axis</a>, and <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html">matplotlib.pyplot.legend</a>.</p></li>
+<li><p>Execute the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html">matplotlib.pyplot.show</a> command to show the plot or the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html">matplotlib.pyplot.savefig</a> command to save the plot as a figure.</p></li>
+</ul>
+<p>See the documentation (follow the links above!) for more information and examples.</p>
+</section>
+<section id="plotting-bar-graphs">
+<h2><span style="color:blue">Plotting bar graphs</span><a class="headerlink" href="#plotting-bar-graphs" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Bar graphs or bar charts are useful <em>to visualize differences between groups or categories</em>, <em>e.g.</em> comparing the effect of mutations on enzyme activity, comparing the growth of bacterial colonies in different environments …</p>
+<p>To create a bar graph:</p>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html">matplotlib.pyplot.figure</a> to create a figure object. This is needed when we want to <em>e.g.</em> tweak the size of the figure.</p></li>
+<li><p>Use <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html">matplotlib.pyplot.bar</a> to produce a plot. The first and second arguments are for the x-coordinates and their corresponding heights. This function has also several optional arguments to define basic formatting properties like bar width (<code class="docutils literal notranslate"><span class="pre">width</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0.8</span></code>), color (<code class="docutils literal notranslate"><span class="pre">color</span></code>), and error bar values (<code class="docutils literal notranslate"><span class="pre">xerr</span></code> and <code class="docutils literal notranslate"><span class="pre">yerr</span></code>; default: <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p></li>
+<li><p>To rotate the names for the x-coordinates, use <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tick_params.html#matplotlib.pyplot.tick_params">plt.tick_params</a>.</p></li>
+<li><p>Color values can be color names or abbreviations, e.g. <code class="docutils literal notranslate"><span class="pre">black</span></code> = <code class="docutils literal notranslate"><span class="pre">k</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code> = <code class="docutils literal notranslate"><span class="pre">r</span></code>, <code class="docutils literal notranslate"><span class="pre">yellow</span></code> = <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code> = <code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">cyan</span></code> = <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">blue</span></code> = <code class="docutils literal notranslate"><span class="pre">b</span></code> …</p></li>
+<li><p>Add features, such as title, axis labels, and a legend to the plot using <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.title.html">matplotlib.pyplot.title</a>, <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html">matplotlib.pyplot.xlabel</a>, <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html">matplotlib.pyplot.ylabel</a>, and <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html">matplotlib.pyplot.legend</a>.</p></li>
+<li><p>Execute the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html">matplotlib.pyplot.show</a> command to show the plot or the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html">matplotlib.pyplot.savefig</a> command to save the plot as a figure.</p></li>
+</ul>
+<p>See the documentation (follow the links above!) for more information and examples.</p>
+</section>
+<section id="graphs-checklist">
+<h2><span style="color:blue">Graphs checklist</span><a class="headerlink" href="#graphs-checklist" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Have you chosen the best graph to share your message?</p></li>
+<li><p>Is the graph as clear as possible for your audience?</p></li>
+<li><p>Does the title describe the data?</p></li>
+<li><p>Are your X- and Y-axes labelled?</p></li>
+<li><p>Do your X- and Y-axes have units?</p></li>
+<li><p>Are your data labels and / or legend placed in the best possible locations?</p></li>
+<li><p>Have you used colors to accentuate key elements in your graph?</p></li>
+<li><p>Is there a well-positioned legend explaining the different colors / patterns?</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2><span style="color:blue">Examples</span><a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Please pay attention to the use of comments (with <code class="docutils literal notranslate"><span class="pre">#</span></code>) to express the units of variables or to describe the meaning of commands.</p>
+<div class="note admonition">
+<p class="admonition-title">Example</p>
+<p>You measured specific binding data (in cpm), in duplicate, of six concentrations of a radioligand (in µM) to angiotensin receptors on membranes of cells transfected with an angiotensin receptor gene. Plot the duplicate experimental data. Identify (by eye) the trend in the data and the data point(s) that could be considered (an) outlier(s).</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Lconc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span>
+<span class="n">Cpm1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">,</span> <span class="mi">1774</span><span class="p">,</span> <span class="mi">3272</span><span class="p">,</span> <span class="mi">6306</span><span class="p">,</span> <span class="mi">9311</span><span class="p">,</span> <span class="mi">12168</span><span class="p">]</span>
+<span class="n">Cpm2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">792</span><span class="p">,</span> <span class="mi">1645</span><span class="p">,</span> <span class="mi">3169</span><span class="p">,</span> <span class="mi">3349</span><span class="p">,</span> <span class="mi">8756</span><span class="p">,</span> <span class="mi">11730</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the library needed (i.e. matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Lconc</span><span class="p">,</span> <span class="n">Cpm1</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= ligand concentrations in µM),y (= specific binding in cpm)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>   <span class="c1">#use a green color</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>   <span class="c1">#use a circle as marker</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dataset 1&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Lconc</span><span class="p">,</span> <span class="n">Cpm2</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= ligand concentrations in µM),y (= specific binding in cpm)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>   <span class="c1">#use a blue color</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>   <span class="c1">#use a square as marker</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dataset 2&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Binding of radioligand to angiotensin receptors&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$[Ligand]$, µM&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the X-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Specific binding, cpm&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>   <span class="c1">#include a legend</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1">#show the plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/217b9e6f2b69a7672d21f5ac2fc0e8125b7199d2fd665fe2bc6f946901c12a70.png" src="../_images/217b9e6f2b69a7672d21f5ac2fc0e8125b7199d2fd665fe2bc6f946901c12a70.png" />
+</div>
+</div>
+<p>→ We can see a hyperbolic trend. We have not reached saturation yet: there is no horizontal asymptote for increasing <span class="math notranslate nohighlight">\([Ligand]\)</span>. It looks like there is an outlier for <span class="math notranslate nohighlight">\([Ligand]\)</span> = 1 µM. Statistical tests or weighted fits are needed <em>(more about this later)</em>!</p>
+<div class="note admonition">
+<p class="admonition-title">Example</p>
+<p>Use the Michaelis-Menten equation. Calculate and plot the initial velocities of an enzyme-catalysed reaction to investigate what happens when <span class="math notranslate nohighlight">\(K_{m}\)</span> is small / large.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the libraries needed (i.e. numpy and matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the function</span>
+<span class="k">def</span> <span class="nf">MichaelisMenten</span><span class="p">(</span><span class="n">Sconc</span><span class="p">,</span> <span class="n">Vmax</span><span class="p">,</span> <span class="n">Km</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the initial velocity of an enzyme-catalysed reaction with the Michaelis-Menten equation,</span>
+<span class="sd">    using the initial substrate concentration, Vmax, and Km.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        Sconc (float), the initial substrate concentration in mM or µM or ...</span>
+<span class="sd">        Vmax (float), the maximum velocity in mM/min or µM/min or mM/s or µM/s or ...</span>
+<span class="sd">        Km (float), the Michaelis-Menten constant in mM or µM or ...</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The initial velocity, v0 of an enzyme-catalysed reaction (float) in mM/min or µM/min or mM/s or µM/s or ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v0</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vmax</span> <span class="o">*</span> <span class="n">Sconc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Km</span> <span class="o">+</span> <span class="n">Sconc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v0</span>
+
+<span class="n">MichaelisMenten</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1">#test the function with random but reasonable parameters</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create substrate concentrations to use as x-values for our function</span>
+<span class="n">substratetest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>   <span class="c1">#return 41 evenly spaced numbers between 0 and 20</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">substratetest</span><span class="p">,</span> <span class="n">MichaelisMenten</span><span class="p">(</span><span class="n">substratetest</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>   <span class="c1">#plot a set of (x (= initial substrate concentrations),y (= the calculated initial velocities using the Vmax and Km provided)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>   <span class="c1">#use a green color</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>   <span class="c1">#use a solid line</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$V_</span><span class="si">{max}</span><span class="s2">$ = 40 µM/min, $K_m$ = 5 µM&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">substratetest</span><span class="p">,</span> <span class="n">MichaelisMenten</span><span class="p">(</span><span class="n">substratetest</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>   <span class="c1">#plot a set of (x (= initial substrate concentrations),y (= the calculated initial velocities using the Vmax and Km provided)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>   <span class="c1">#use a blue color</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>   <span class="c1">#use a dashed line</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$V_</span><span class="si">{max}</span><span class="s2">$ = 40 µM/min, $K_m$ = 0.5 µM&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Michaelis-Menten curve: the influence of $K_m$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$[Substrate]_0$, µM&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the X-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$v_0$, µM/min&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>   <span class="c1">#include a legend</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figure_enzyme.png&#39;</span><span class="p">)</span>   <span class="c1">#save the plot as a figure</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9d3f348ce4633df453c484b1abda832c9114d955cf37ba04b98e12b0fe515d29.png" src="../_images/9d3f348ce4633df453c484b1abda832c9114d955cf37ba04b98e12b0fe515d29.png" />
+</div>
+</div>
+<p>→ We can see a hyperbolic trend. We can see that a small <span class="math notranslate nohighlight">\(K_{m}\)</span> indicates that the enzyme requires only a small amount of substrate to become saturated: the maximum velocity is reached at relatively low substrate concentrations. A large <span class="math notranslate nohighlight">\(K_{m}\)</span> indicates the need for higher substrate concentrations to achieve maximum reaction velocity.</p>
+<div class="note admonition">
+<p class="admonition-title">Example</p>
+<p>You measured the number of days to flowering for a wild type and six mutants. Plot the findings.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Plant</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Wild type&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 3&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 4&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 5&quot;</span><span class="p">,</span> <span class="s2">&quot;Mutant 6&quot;</span><span class="p">]</span>
+<span class="n">DaysToFlower</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the library needed (i.e. matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">Plant</span><span class="p">,</span> <span class="n">DaysToFlower</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= wild type or mutants),y (= the measured variable)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>   <span class="c1">#use a green color</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>   <span class="c1">#rotate the names for the x-coordinates 90 degrees</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Number of days to flower for wild type and mutant plants&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of days to flower&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1">#show the plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e939ef347ff1ef501d385176d95756d0dc7860cd37d5045b6084b5253d7b8065.png" src="../_images/e939ef347ff1ef501d385176d95756d0dc7860cd37d5045b6084b5253d7b8065.png" />
+</div>
+</div>
+<p>→ We can see that some mutant take more time to flower than others.</p>
+</section>
+<section id="exercises">
+<h2><span style="color:blue">Exercises</span><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Before continuing with the exercises, take some time to play with the code for the graphs above. Can you change line and marker color? Can you change the axis titles? …</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>You measured initial velocities (in µM/s) of an enzyme-catalyzed reaction using eight initial substrate concentrations (in µM) in the absence and presence of 15 µM inhibitor. Plot the experimental data. Identify (by eye) the type of inhibitor.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Sconc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]</span>
+<span class="n">NoI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">185</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">327</span><span class="p">,</span> <span class="mi">555</span><span class="p">,</span> <span class="mi">614</span><span class="p">,</span> <span class="mi">757</span><span class="p">,</span> <span class="mi">877</span><span class="p">,</span> <span class="mi">897</span><span class="p">]</span>
+<span class="n">WithI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">404</span><span class="p">,</span> <span class="mi">624</span><span class="p">,</span> <span class="mi">830</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Here’s one possible solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the library needed (i.e. matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Sconc</span><span class="p">,</span> <span class="n">NoI</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= substrate concentrations in µM),y (= initial velocities in µM/s)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>   <span class="c1">#use a green color</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>   <span class="c1">#use a circle as marker</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Without inhibitor&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Sconc</span><span class="p">,</span> <span class="n">WithI</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= substrate concentrations in µM),y (= initial velocities in µM/s)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>   <span class="c1">#use a blue color</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>   <span class="c1">#use a square as marker</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;With inhibitor&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Initial velocities in the absence and presence of inhibitor&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$[Substrate]$, µM&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the X-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$v_0$, µM/s&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>   <span class="c1">#include a legend</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1">#show the plot</span>
+</pre></div>
+</div>
+<p>→ On the graph, <span class="math notranslate nohighlight">\(V_{max}\)</span>, the horizontal asymptote at high <span class="math notranslate nohighlight">\([Substrate]\)</span> looks the same. <span class="math notranslate nohighlight">\(K_{m}\)</span>, the concentration of substrate at which the enzyme achieves half Vmax, looks larger in the presence of the inhibitor. This behaviour is characteristic of a competitive inhibitor.</p>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Use the following equation: fraction of bound receptor = <span class="math notranslate nohighlight">\([RL]\)</span> / (<span class="math notranslate nohighlight">\([RL]\)</span> + <span class="math notranslate nohighlight">\([R]\)</span>) = <span class="math notranslate nohighlight">\([Ligand]\)</span> / (<span class="math notranslate nohighlight">\([Ligand]\)</span> + <span class="math notranslate nohighlight">\(K_{d}\)</span>). Calculate and plot the fraction of bound receptor to investigate what happens when <span class="math notranslate nohighlight">\(K_{d}\)</span> is small / large.</p>
+<p>Tips:</p>
+<ul class="simple">
+<li><p>Define a function that calculates the fraction of bound receptor using the equation provided.</p></li>
+<li><p>Create an array using a fixed number of points, <em>e.g.</em> 1000, between 0 and 100 mM. This will serve as the x-values.</p></li>
+<li><p>Plot the function for two different scenarios, <em>e.g.</em> <span class="math notranslate nohighlight">\(K_{d}\)</span> = 1 mM and <span class="math notranslate nohighlight">\(K_{d}\)</span> = 10 mM. Use a different color for each curve.</p></li>
+<li><p>Make sure to include a title, X-and Y-axes labels, and a legend.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Here’s one possible solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the libraries needed (i.e. numpy and matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the function</span>
+<span class="k">def</span> <span class="nf">FractionBoundReceptor</span><span class="p">(</span><span class="n">Lconc</span><span class="p">,</span> <span class="n">Kd</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the fraction of bound receptor using the initial ligand concentration and Kd.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        Lconc (float), the initial ligand concentration in mM or µM or ...</span>
+<span class="sd">        Kd (float), the dissociation constant in mM or µM or ...</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The fraction of bound receptor in %</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FractionBound</span> <span class="o">=</span> <span class="n">Lconc</span> <span class="o">/</span> <span class="p">(</span><span class="n">Lconc</span> <span class="o">+</span> <span class="n">Kd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FractionBound</span>
+
+<span class="n">FractionBoundReceptor</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>   <span class="c1">#test the function with random but reasonable parameters</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#create substrate concentrations to use as x-values for our function</span>
+<span class="n">ligandtest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>   <span class="c1">#return 1000 evenly spaced numbers between 0 and 100</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ligandtest</span><span class="p">,</span> <span class="n">FractionBoundReceptor</span><span class="p">(</span><span class="n">ligandtest</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>   <span class="c1">#plot a set of (x (= initial ligand concentrations),y (= the calculated fraction of bound receptor using the Kd provided)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>   <span class="c1">#use a green color</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>   <span class="c1">#use a solid line</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$K_d$ = 1 mM&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ligandtest</span><span class="p">,</span> <span class="n">FractionBoundReceptor</span><span class="p">(</span><span class="n">ligandtest</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>   <span class="c1">#plot a set of (x (= initial ligand concentrations),y (= the calculated fraction of bound receptor using the Kd provided)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>   <span class="c1">#use a blue color</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>   <span class="c1">#use a dashed line</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$K_d$ = 10 mM&quot;</span><span class="p">)</span>   <span class="c1">#use a legend label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fraction of bound receptor: the influence of $K_d$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$[Ligand]_0$, µM&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the X-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of bound receptor, %&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>   <span class="c1">#include a legend</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figure_binding.png&#39;</span><span class="p">)</span>   <span class="c1">#save the plot as a figure</span>
+</pre></div>
+</div>
+<p>→ On the graph, when <span class="math notranslate nohighlight">\([Ligand]_{0}\)</span> = 0, no receptor has ligand bound. When <span class="math notranslate nohighlight">\([Ligand]_{0}\)</span> = <span class="math notranslate nohighlight">\(K_{d}\)</span>, the fractional occupancy is 0.50. When <span class="math notranslate nohighlight">\([Ligand]_{0}\)</span> =9 <span class="math notranslate nohighlight">\(K_{d}\)</span>, the fractional occupancy is 0.90.</p>
+<p>We can see that a small <span class="math notranslate nohighlight">\(K_{d}\)</span> indicates that the receptor requires only a small amount of ligand to become saturated. A large Kd indicates the need for higher ligand concentrations to achieve saturation.</p>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>You measured specific activities (in U/mg) for wild type and mutant enzyme. Plot the experimental data. Which mutant is the most / least active?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Protein</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Wild type&quot;</span><span class="p">,</span> <span class="s2">&quot;Y46A&quot;</span><span class="p">,</span> <span class="s2">&quot;W50A&quot;</span><span class="p">,</span> <span class="s2">&quot;R55A&quot;</span><span class="p">,</span> <span class="s2">&quot;W171A&quot;</span><span class="p">,</span> <span class="s2">&quot;D85A&quot;</span><span class="p">]</span>
+<span class="n">SpecificActivity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">62</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Here’s one possible solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#import the library needed (i.e. matplotlib) and introduce convenient naming</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#create the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>   <span class="c1">#create a figure object, the size is provided in inches (width, height)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">Protein</span><span class="p">,</span> <span class="n">SpecificActivity</span><span class="p">,</span>   <span class="c1">#plot a set of (x (= wild type or mutants),y (= the measured variable)) data</span>
+         <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;mediumvioletred&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">])</span>   <span class="c1">#use a green color</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>   <span class="c1">#rotate the names for the x-coordinates 90 degrees</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Enzyme activity for wild type and mutant enzymes&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>   <span class="c1">#define the graph title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Specific activity (U/mg)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>   <span class="c1">#define the Y-axis label</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1">#show the plot</span>
+</pre></div>
+</div>
+<p>→ On the graph, we can see that W50A is the most active and Y46A the least active mutant.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Libraries.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Libraries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PandasForTabularData.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pandas For Working With Tabular Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kind-of-graphs"><span style="color:blue">Kind of graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-line-graphs"><span style="color:blue">Plotting line graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-bar-graphs"><span style="color:blue">Plotting bar graphs</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graphs-checklist"><span style="color:blue">Graphs checklist</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples"><span style="color:blue">Examples</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises"><span style="color:blue">Exercises</span></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Charmian Dawson, Toryn Poolman, and Renee Vancraenenbroeck; UCL
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
