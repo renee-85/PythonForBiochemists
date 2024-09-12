@@ -1,0 +1,13 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: WelcomeToPythonForBiochemists
+chapters:
+- file: chapters/JupyterNotebooksGettingStarted
+- file: chapters/VariablesArithmeticOperators
+- file: chapters/DataTypesIndicesSlices
+- file: chapters/ForLoopsLogicStatementsFunctions
+- file: chapters/Libraries
+- file: chapters/DrawingGraphs
+- file: chapters/PandasForTabularData
